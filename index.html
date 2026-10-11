@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trentunesimo Selfwork Javascript</title>
+</head>
+<body>
+    <script>
+        let bowling = {
+            players : [
+            {name: 'Anakin'},
+            {name: 'Padme'},
+            {name: 'Luka'},
+            {name: 'Leia'},
+            ],
+
+            setScores: function(){
+                this.players.forEach(player =>{
+                    player.scores = [];
+
+                    for(let i=1;i<=10;i++){
+                        player.scores.push(Math.floor(Math.random()*11));
+                    }
+                })
+            },
+
+            setFinalScore: function(){
+                this.players.forEach(player =>{
+                    player.finalScore=player.scores.reduce((acc, n)=>acc+n,0);
+                })
+            },
+
+            setRanking: function(){
+                this.players.sort((a,b)=>b.finalScore-a.finalScore);
+                if(this.players[0].finalScore > this.players[1].finalScore){
+                    let winner = this.players[0];
+                    console.log(`The winner is: ${winner.name}`);
+                } else {
+                    console.log('We have a draw!');
+                }
+            },
+
+            addPlayer: function(newPlayerName){
+                this.players.push({name: newPlayerName});
+            },
+
+            printRanking: function(){
+                console.log('This is the final ranking!');
+                this.players.forEach((player,i)=>{
+                    console.log(`${i+1}. ${player.name}: ${player.finalScore} points!`);
+                })
+            },
+        }
+
+        bowling.addPlayer('Yoda');
+        bowling.setScores();
+        bowling.setFinalScore();
+        bowling.setRanking();
+        bowling.printRanking();
+    </script>
+</body>
+</html>
